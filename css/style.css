@@ -370,35 +370,6 @@ strong { font-weight: 600; }
 .forge__photo { position: sticky; top: calc(var(--header-h) + 24px); overflow: hidden; border-radius: var(--radius); aspect-ratio: 4 / 5; }
 .forge__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 35% 50%; }
 
-/* Путь ножа */
-.path { margin-top: clamp(64px, 8vw, 112px); }
-.path__head { margin-bottom: clamp(32px, 4vw, 48px); }
-.path__title { max-width: 18em; font-size: clamp(1.8rem, 2.4vw + 1rem, 3rem); font-weight: 600; line-height: 1.05; text-transform: uppercase; color: var(--light); }
-.path__layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
-
-.path__stage { position: sticky; top: calc(var(--header-h) + 24px); aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--radius); background: var(--black-3); }
-.path__stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .7s ease, transform 1.4s ease; }
-.path__stage img.is-active { opacity: 1; transform: none; }
-.path__stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(15, 15, 15, .45), transparent 40%); pointer-events: none; }
-
-/* Шкала слева от шагов: «накаляется» по мере прокрутки */
-.path__steps { --progress: 0; position: relative; padding-left: 40px; }
-.path__steps::before,
-.path__steps::after { content: ""; position: absolute; left: 7px; top: 8px; width: 2px; border-radius: 2px; }
-.path__steps::before { bottom: 8px; background: var(--line-dark); }
-.path__steps::after { height: calc((100% - 16px) * var(--progress)); background: linear-gradient(to bottom, #7c2d12, var(--spark) 55%, #fbbf24); box-shadow: 0 0 12px rgba(234, 88, 12, .6); }
-
-.path__step { position: relative; padding: 8px 0 clamp(72px, 16vh, 160px); transition: opacity .5s ease; }
-.js .path__step { opacity: .38; }
-.path__step:last-child { padding-bottom: 8px; }
-.js .path__step.is-active { opacity: 1; }
-.path__step::before { content: ""; position: absolute; left: -40px; top: 12px; z-index: 1; width: 16px; height: 16px; border: 2px solid var(--line-dark); border-radius: 50%; background: var(--black-2); transition: border-color .4s, background .4s, box-shadow .4s; }
-.path__step.is-active::before { border-color: var(--spark); background: var(--spark); box-shadow: 0 0 0 5px rgba(234, 88, 12, .18), 0 0 18px rgba(234, 88, 12, .7); }
-.path__num { display: block; margin-bottom: 4px; font-family: var(--font-head); font-size: .85rem; letter-spacing: .14em; color: var(--spark); }
-.path__step h4 { margin: 0 0 .4em; font-family: var(--font-head); font-size: clamp(1.4rem, 1vw + 1rem, 1.9rem); font-weight: 500; text-transform: uppercase; letter-spacing: .03em; color: var(--light); }
-.path__step p { margin: 0; max-width: 30em; color: var(--light-muted); }
-.path__pic { display: none; }
-
 .price-panel { display: grid; grid-template-columns: 1fr 1fr 1.4fr; margin: 32px 0 10px; border: 1px solid var(--line-dark); }
 .price-panel__item { padding: 16px 18px; }
 .price-panel__item + .price-panel__item { border-left: 1px solid var(--line-dark); }
@@ -427,10 +398,6 @@ strong { font-weight: 600; }
   .forge__photo { position: relative; top: 0; aspect-ratio: 16 / 11; }
   .perks { grid-template-columns: 1fr; }
   .strip { grid-template-columns: repeat(3, 1fr); }
-  .path__layout { grid-template-columns: 1fr; }
-  .path__stage { display: none; }
-  .path__pic { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; margin-bottom: 18px; border-radius: var(--radius); }
-  .path__step { padding-bottom: 48px; }
 }
 @media (max-width: 560px) {
   .price-panel { grid-template-columns: 1fr 1fr; }
@@ -673,6 +640,4 @@ strong { font-weight: 600; }
   html { scroll-behavior: auto; }
   .hero__bg img { animation: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
-  .path__stage img, .path__step, .path__step::before { transition: none; }
-  .path__stage img { transform: none; }
 }

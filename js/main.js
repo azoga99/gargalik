@@ -45,35 +45,6 @@ if (heroVideo) {
   }
 }
 
-// Путь ножа: активный шаг — тот, что пересёк середину экрана; фото и шкала следуют за ним
-const path = document.getElementById('knife-path');
-if (path) {
-  const list = path.querySelector('.path__steps');
-  const steps = [...list.children];
-  const frames = [...path.querySelectorAll('.path__stage img')];
-  let ticking = false;
-
-  const update = () => {
-    ticking = false;
-    const mid = window.innerHeight * 0.55;
-    let active = 0;
-    steps.forEach((step, i) => { if (step.getBoundingClientRect().top < mid) active = i; });
-    steps.forEach((step, i) => step.classList.toggle('is-active', i <= active));
-    frames.forEach((img, i) => img.classList.toggle('is-active', i === active));
-
-    const box = list.getBoundingClientRect();
-    const progress = Math.min(1, Math.max(0, (mid - box.top) / box.height));
-    list.style.setProperty('--progress', progress.toFixed(3));
-  };
-
-  const onPathScroll = () => {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
-  };
-  update();
-  window.addEventListener('scroll', onPathScroll, { passive: true });
-  window.addEventListener('resize', onPathScroll);
-}
-
 // Лайтбокс для галерей
 const lightbox = document.getElementById('lightbox');
 const lbImg = lightbox.querySelector('.lightbox__img');
