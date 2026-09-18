@@ -1,5 +1,5 @@
 /* =========================================================
-   Семейная мастерская Юго-Камского
+   Музейно-ремесленный центр «Медвежья сталь»
    Стиль «Наследие и мастерство» (Heritage & Craft)
    ========================================================= */
 
@@ -284,9 +284,9 @@ strong { font-weight: 600; }
 
 .hero__content { padding-bottom: clamp(40px, 6vw, 72px); }
 .hero__title {
-  max-width: 11em;
+  max-width: 15em;
   margin-bottom: .45em;
-  font-size: clamp(2.6rem, 6.4vw + .5rem, 6rem);
+  font-size: clamp(2.6rem, 4.6vw + .5rem, 4.75rem);
   font-weight: 700;
   line-height: .98;
   text-transform: uppercase;
