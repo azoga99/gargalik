@@ -554,7 +554,6 @@ strong { font-weight: 600; }
 .review__tag { margin-bottom: 14px; font-family: var(--font-head); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--spark); }
 .review__text { flex: 1; position: relative; padding-top: 28px; color: var(--brown-muted); }
 .review__text::before { content: "“"; position: absolute; top: -18px; left: -4px; font-family: var(--font-head); font-size: 4rem; line-height: 1; color: var(--wood); }
-.review__text--draft { font-style: italic; opacity: .55; }
 .review__author { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding-top: 16px; border-top: 1px solid var(--line-light); font-size: .88rem; }
 .review__author b { font-family: var(--font-head); font-size: 1.05rem; font-weight: 500; }
 .review__author span { opacity: .6; }
