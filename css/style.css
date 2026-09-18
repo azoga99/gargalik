@@ -191,9 +191,14 @@ strong { font-weight: 600; }
   line-height: 1.15;
   letter-spacing: .14em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--light-muted);
 }
 .logo__text b { font-size: 1.35rem; font-weight: 600; letter-spacing: .08em; color: var(--light); }
+@media (max-width: 360px) {
+  .logo__text { font-size: .66rem; letter-spacing: .08em; }
+  .logo__text b { font-size: 1.15rem; letter-spacing: .05em; }
+}
 
 .nav { display: flex; align-items: center; gap: clamp(14px, 1.8vw, 28px); }
 .nav a:not(.btn) {
@@ -231,7 +236,7 @@ strong { font-weight: 600; }
 .header.is-open .burger span:nth-child(2) { opacity: 0; }
 .header.is-open .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
   .burger { display: block; }
   .nav {
     position: fixed;
