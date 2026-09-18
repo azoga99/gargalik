@@ -1,3 +1,18 @@
+// Сайт всегда открывается с начала: без восстановления прокрутки и без якоря в адресе
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+window.scrollTo(0, 0);
+
+// Ссылки на блоки страницы прокручивают, но не дописывают #якорь в адрес
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link || link.closest('[data-gallery]')) return;
+  const target = document.getElementById(link.getAttribute('href').slice(1));
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView(); // плавность и отступ под шапку берутся из CSS
+});
+
 // Шапка: фон при прокрутке и мобильное меню
 const header = document.getElementById('header');
 const burger = document.getElementById('burger');
