@@ -523,11 +523,10 @@ strong { font-weight: 600; }
 /* =========================================================
    ЭКСКУРСИЯ
    ========================================================= */
-.excursion { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-.excursion__photos { display: grid; gap: 12px; }
-.excursion__photos img { width: 100%; object-fit: cover; border-radius: var(--radius); }
-.excursion__photos img:first-child { aspect-ratio: 16 / 9; }
-.excursion__photos img:last-child { aspect-ratio: 16 / 7; object-position: 50% 32%; }
+.excursion { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+.excursion__photos { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); gap: 12px; aspect-ratio: 2 / 1; }
+.excursion__photos img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); }
+.excursion__photos img:last-child { object-position: 50% 40%; }
 .excursion .h2 { font-size: clamp(1.8rem, 2.6vw + .6rem, 2.8rem); }
 .excursion__price { margin: 1.2em 0; font-family: var(--font-head); font-size: 2.6rem; font-weight: 600; line-height: 1; color: var(--spark) !important; }
 .excursion__price small { font-family: var(--font-body); font-size: .95rem; font-weight: 400; color: var(--light-muted); }
