@@ -32,6 +32,48 @@ if ('IntersectionObserver' in window) {
   revealItems.forEach((el) => el.classList.add('is-visible'));
 }
 
+// Видео на первом экране: грузим только когда это уместно, показываем после старта
+const heroVideo = document.querySelector('.hero__video');
+if (heroVideo) {
+  const conn = navigator.connection;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const slowNet = conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''));
+  if (!reduceMotion && !slowNet) {
+    heroVideo.addEventListener('playing', () => heroVideo.classList.add('is-playing'), { once: true });
+    heroVideo.src = heroVideo.dataset.src;
+    heroVideo.play().catch(() => {}); // автозапуск запрещён — остаётся фото
+  }
+}
+
+// Путь ножа: активный шаг — тот, что пересёк середину экрана; фото и шкала следуют за ним
+const path = document.getElementById('knife-path');
+if (path) {
+  const list = path.querySelector('.path__steps');
+  const steps = [...list.children];
+  const frames = [...path.querySelectorAll('.path__stage img')];
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const mid = window.innerHeight * 0.55;
+    let active = 0;
+    steps.forEach((step, i) => { if (step.getBoundingClientRect().top < mid) active = i; });
+    steps.forEach((step, i) => step.classList.toggle('is-active', i <= active));
+    frames.forEach((img, i) => img.classList.toggle('is-active', i === active));
+
+    const box = list.getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, (mid - box.top) / box.height));
+    list.style.setProperty('--progress', progress.toFixed(3));
+  };
+
+  const onPathScroll = () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  };
+  update();
+  window.addEventListener('scroll', onPathScroll, { passive: true });
+  window.addEventListener('resize', onPathScroll);
+}
+
 // Лайтбокс для галерей
 const lightbox = document.getElementById('lightbox');
 const lbImg = lightbox.querySelector('.lightbox__img');
