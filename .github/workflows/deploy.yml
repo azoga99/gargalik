@@ -1,0 +1,35 @@
+name: Выкладка на хостинг
+
+# После каждой отправки в main файлы сайта уезжают на Timeweb по FTP.
+# Реквизиты лежат в секретах репозитория: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Загрузить файлы по FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ./
+          # Рабочие материалы и служебные файлы на хостинг не нужны
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .nojekyll
+            assets/**
+            *.odt
+            Ссылки на фото, видео и отзывы.txt

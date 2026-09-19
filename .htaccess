@@ -1,0 +1,34 @@
+# Один адрес сайта: https://medvezhya-stal.ru
+# Всё остальное (http, www, .рф, технический адрес хостинга) перенаправляем сюда,
+# иначе поисковики сочтут это копиями сайта.
+
+RewriteEngine On
+
+# Точный адрес по https — ничего не делаем
+RewriteCond %{HTTPS} on
+RewriteCond %{HTTP_HOST} ^medvezhya-stal\.ru$ [NC]
+RewriteRule ^ - [L]
+
+# Всё прочее — на основной адрес, с сохранением пути
+RewriteRule ^(.*)$ https://medvezhya-stal.ru/$1 [R=301,L]
+
+# Страница ошибки — та же главная
+ErrorDocument 404 /index.html
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Картинки, шрифты и видео меняются редко
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+  # Стили и скрипт подключены с версией ?v=, поэтому тоже надолго
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  # Саму страницу перечитываем часто, чтобы правки были видны сразу
+  ExpiresByType text/html "access plus 10 minutes"
+</IfModule>

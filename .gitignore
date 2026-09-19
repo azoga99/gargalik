@@ -5,3 +5,6 @@ assets/video/
 assets/
 *.odt
 *.txt
+
+# robots.txt нужен на сайте
+!robots.txt
