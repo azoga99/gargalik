@@ -4,13 +4,18 @@
 
 RewriteEngine On
 
-# Точный адрес по https — ничего не делаем
-RewriteCond %{HTTPS} on
+# ВРЕМЕННО: переход на https выключен, пока не выпущен SSL-сертификат.
+# Как только сертификат появится, раскомментировать блок ниже и убрать следующий за ним.
+
+# RewriteCond %{HTTPS} on
+# RewriteCond %{HTTP_HOST} ^medvezhya-stal\.ru$ [NC]
+# RewriteRule ^ - [L]
+# RewriteRule ^(.*)$ https://medvezhya-stal.ru/$1 [R=301,L]
+
+# Пока сводим только имена: www, .рф и технический адрес — на medvezhya-stal.ru
 RewriteCond %{HTTP_HOST} ^medvezhya-stal\.ru$ [NC]
 RewriteRule ^ - [L]
-
-# Всё прочее — на основной адрес, с сохранением пути
-RewriteRule ^(.*)$ https://medvezhya-stal.ru/$1 [R=301,L]
+RewriteRule ^(.*)$ http://medvezhya-stal.ru/$1 [R=302,L]
 
 # Страница ошибки — та же главная
 ErrorDocument 404 /index.html
