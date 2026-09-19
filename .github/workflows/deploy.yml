@@ -23,7 +23,9 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          # Timeweb не поддерживает FTP с шифрованием, поэтому обычный FTP.
+          # Поэтому же для выкладки заведён отдельный FTP-пользователь, а не главный аккаунт.
+          protocol: ftp
           server-dir: ./
           # Рабочие материалы и служебные файлы на хостинг не нужны
           exclude: |
