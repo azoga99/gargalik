@@ -7,18 +7,17 @@ DirectoryIndex index.html
 
 RewriteEngine On
 
-# ВРЕМЕННО: переход на https выключен, пока не выпущен SSL-сертификат.
-# Как только сертификат появится, раскомментировать блок ниже и убрать следующий за ним.
+# Проверка домена для выпуска и продления сертификата — не трогаем
+RewriteRule ^\.well-known/acme-challenge/ - [L]
 
-# RewriteCond %{HTTPS} on
-# RewriteCond %{HTTP_HOST} ^medvezhya-stal\.ru$ [NC]
-# RewriteRule ^ - [L]
-# RewriteRule ^(.*)$ https://medvezhya-stal.ru/$1 [R=301,L]
-
-# Пока сводим только имена: www, .рф и технический адрес — на medvezhya-stal.ru
+# Точный адрес по https — ничего не делаем
+RewriteCond %{HTTPS} on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} =https
 RewriteCond %{HTTP_HOST} ^medvezhya-stal\.ru$ [NC]
 RewriteRule ^ - [L]
-RewriteRule ^(.*)$ http://medvezhya-stal.ru/$1 [R=302,L]
+
+# Всё прочее — на основной адрес, с сохранением пути
+RewriteRule ^(.*)$ https://medvezhya-stal.ru/$1 [R=301,L]
 
 # Страница ошибки — та же главная
 ErrorDocument 404 /index.html
